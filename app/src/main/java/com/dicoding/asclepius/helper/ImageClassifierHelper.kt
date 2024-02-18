@@ -3,7 +3,6 @@ package com.dicoding.asclepius.helper
 import android.content.ContentResolver
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
@@ -74,7 +73,7 @@ class ImageClassifierHelper(
                 .build()
             val tensorImage = imageProcessor.process(
                 TensorImage.fromBitmap(
-                    getBitmapFromUri(
+                    getUriBitmap(
                         context.contentResolver,
                         imageUri
                     )
@@ -99,7 +98,7 @@ class ImageClassifierHelper(
         }
     }
 
-    private fun getBitmapFromUri(contentResolver: ContentResolver, uri: Uri): Bitmap? {
+    private fun getUriBitmap(contentResolver: ContentResolver, uri: Uri): Bitmap? {
         return try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                 val source = ImageDecoder.createSource(contentResolver, uri)
